@@ -29,7 +29,7 @@ function getPosition() {
   })
 }
 
-function onCodeAddress(){
+function onCodeAddress() {
   mapService.codeAddress()
 }
 
@@ -47,9 +47,9 @@ function onGetLocs() {
 
 function renderLocsTable(locs) {
   Promise.all([...locs]).then((locs) => {
-    
-    const strHTMLs = locs.map((loc)=>
-      `<tr class="loc-table${loc.id}">
+    const strHTMLs = locs.map(
+      (loc) =>
+        `<tr class="loc-table${loc.id}">
       <td>${loc.id}</td>
       <td>${loc.name}</td>
       <td>${loc.lat}</td>

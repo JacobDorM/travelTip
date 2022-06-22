@@ -15,7 +15,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
   return _connectGoogleApi().then(() => {
     console.log('google available')
-      gGeocoder = new google.maps.Geocoder();
+    gGeocoder = new google.maps.Geocoder()
 
     gMap = new google.maps.Map(document.querySelector('#map'), {
       center: { lat, lng },
@@ -41,19 +41,19 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function codeAddress() {
-  var address = document.getElementById('address').value;
+  var address = document.getElementById('address').value
   var marker
-  gGeocoder.geocode( { 'address': address}, function(results, status) {
+  gGeocoder.geocode({ address: address }, function (results, status) {
     if (status == 'OK') {
-      gMap.setCenter(results[0].geometry.location);
-       marker = new google.maps.Marker({
-          map: gMap,
-          position: results[0].geometry.location
-      });
+      gMap.setCenter(results[0].geometry.location)
+      marker = new google.maps.Marker({
+        map: gMap,
+        position: results[0].geometry.location,
+      })
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+      alert('Geocode was not successful for the following reason: ' + status)
     }
-  });
+  })
 }
 
 function addMarker(loc) {
