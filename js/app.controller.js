@@ -18,7 +18,7 @@ function onInit() {
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
-  const a = 10
+  const a = 19
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject)
   })
