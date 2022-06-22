@@ -7,12 +7,14 @@ window.onPanTo = onPanTo
 window.onDeleteLoc = onDeleteLoc
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
-
+window.onCopyGithubPages = onCopyGithubPages
 function onInit() {
   mapService
     .initMap()
     .then(() => {
       console.log('Map is ready')
+      const params = new Proxy(new URLSearchParams(window.location.search), { get: (searchParams, prop) => searchParams.get(prop) })
+      if (params.lat !== null && params.lng !== null) onPanTo(params.lat, params.lng)
     })
     .catch(() => console.log('Error: cannot init map'))
 }
@@ -77,4 +79,8 @@ function onPanTo(lat, lng) {
 function onDeleteLoc(locId) {
   document.querySelector(`.loc-table${locId}`).innerHTML = ''
   locService.deleteLoc(locId)
+}
+
+function onCopyGithubPages() {
+  navigator.clipboard.writeText('https://jacobdorm.github.io/travelTip?lat=10&lng=5')
 }

@@ -1,4 +1,4 @@
-import { locService } from "./loc.service.js"
+import { locService } from './loc.service.js'
 
 export const mapService = {
   initMap,
@@ -19,15 +19,15 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     })
 
     //on click map return location
-     gMap.addListener('click', (mapsMouseEvent) => {
+    gMap.addListener('click', (mapsMouseEvent) => {
       const userPosition = mapsMouseEvent.latLng.toJSON()
       const newLocName = prompt('enter your location name...')
       const newLoc = {
-        name:newLocName,
-        lat : userPosition.lat,
-        lng : userPosition.lng,
+        name: newLocName,
+        lat: userPosition.lat,
+        lng: userPosition.lng,
       }
-      
+
       locService.addNewLoc(newLoc)
     })
 
