@@ -82,5 +82,5 @@ function onDeleteLoc(locId) {
 }
 
 function onCopyGithubPages() {
-  navigator.clipboard.writeText('https://jacobdorm.github.io/travelTip?lat=10&lng=5')
+  navigator.clipboard.writeText('https://jacobdorm.github.io/travelTip?lat=32.557201&lng=34.832581')
 }
