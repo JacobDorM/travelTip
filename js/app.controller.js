@@ -33,13 +33,13 @@ function onGetLocs() {
   locService.getLocs().then((locs) => {
     renderLocsTable(locs)
     console.log('Locations:', locs)
-    // document.querySelector('.locs').innerText = locs[0].id
-    // JSON.stringify(locs)
+
   })
 }
 
 function renderLocsTable(locs){
   Promise.all([...locs]).then((locs) => {
+    
     const strHTMLs = locs.map((loc)=>
       `<tbody>
       <td>${loc.id}</td>
@@ -52,10 +52,11 @@ function renderLocsTable(locs){
       <td><button onclick="">GO</button></td>
       <td><button onclick="">DELETE</button></td>
       </tbody>`
-    )
+      )
       console.log('losc',locs)
-    document.querySelector(".locs").innerHTML = strHTMLs.join("")
-  })
+      document.querySelector(".locs-table").innerHTML = strHTMLs.join("")
+      document.querySelector(".table").style.display = 'inline'
+})
 }
 
 function onGetUserPos() {
@@ -73,3 +74,4 @@ function onPanTo() {
   console.log('Panning the Map to tokio')
   mapService.panTo(35.6895, 139.6917)
 }
+
