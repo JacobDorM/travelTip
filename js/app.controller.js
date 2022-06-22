@@ -31,9 +31,27 @@ function onAddMarker() {
 
 function onGetLocs() {
   locService.getLocs().then((locs) => {
-    renderLocTable(locs)
-    // console.log('Locations:', locs)
-    // document.querySelector('.locs').innerText = JSON.stringify(locs)
+    renderLocsTable(locs)
+  })
+}
+
+function renderLocsTable(locs) {
+  Promise.all([...locs]).then((locs) => {
+    const strHTMLs = locs.map(
+      (loc) =>
+        `<tbody>
+      <td>${loc.id}</td>
+      <td>${loc.name}</td>
+      <td>${loc.lat}</td>
+      <td>${loc.lng}</td>
+      <td>${loc.weather}</td>
+      <td>${loc.createdAt}</td>
+      <td>${loc.updatedAt}</td>
+      <td><button onclick="">GO</button></td>
+      <td><button onclick="">DELETE</button></td>
+      </tbody>`
+    )
+    document.querySelector('.locs').innerHTML = strHTMLs.join('')
   })
 }
 
