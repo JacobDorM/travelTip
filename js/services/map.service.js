@@ -19,6 +19,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
     //on click map return location
     gloc = gMap.addListener('click', (mapsMouseEvent) => {
+      console.log(mapsMouseEvent)
       lat = mapsMouseEvent.latLng.lat()
       lng = mapsMouseEvent.latLng.lng()
       console.log('loc', { lat, lng })
@@ -26,7 +27,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     })
 
     // console.log('locs',locs)
-    console.log('Map)ap!', gMap)
+    console.log('Map!', gMap)
   })
 }
 
