@@ -4,6 +4,7 @@ import { mapService } from './services/map.service.js'
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
+window.onDeleteLoc = onDeleteLoc
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 
@@ -39,7 +40,7 @@ function renderLocsTable(locs) {
   Promise.all([...locs]).then((locs) => {
     const strHTMLs = locs.map(
       (loc) =>
-        `<tbody>
+        `<tbody class="loc-table${loc.id}">
       <td>${loc.id}</td>
       <td>${loc.name}</td>
       <td>${loc.lat}</td>
@@ -47,11 +48,11 @@ function renderLocsTable(locs) {
       <td>${loc.weather}</td>
       <td>${loc.createdAt}</td>
       <td>${loc.updatedAt}</td>
-      <td><button onclick="">GO</button></td>
-      <td><button onclick="">DELETE</button></td>
+      <td><button onclick="onPanTo('${loc.lat}','${loc.lng}')">GO</button></td>
+      <td><button onclick="onDeleteLoc('${loc.id}')">DELETE</button></td>
       </tbody>`
     )
-    document.querySelector('.locs').innerHTML = strHTMLs.join('')
+    document.querySelector('.locs-table').innerHTML = strHTMLs.join('')
   })
 }
 
@@ -66,7 +67,11 @@ function onGetUserPos() {
     })
 }
 
-function onPanTo() {
-  console.log('Panning the Map to tokio')
-  mapService.panTo(35.6895, 139.6917)
+function onPanTo(lat, lng) {
+  mapService.panTo(lat, lng)
+}
+
+function onDeleteLoc(locId) {
+  document.querySelector(`.loc-table${locId}`).innerHTML = ''
+  locService.deleteLoc(locId)
 }

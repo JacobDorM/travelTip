@@ -4,6 +4,7 @@ const STORAGE_KEY = 'locsDB'
 
 export const locService = {
   getLocs,
+  deleteLoc,
 }
 
 const locs = [
@@ -17,6 +18,10 @@ function getLocs() {
       resolve(locs)
     }, 2000)
   })
+}
+function deleteLoc(locId) {
+  locs.splice(locId, 1)
+  console.log(locs)
 }
 
 saveToStorage(STORAGE_KEY, locs)
