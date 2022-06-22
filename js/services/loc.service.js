@@ -20,5 +20,3 @@ function getLocs() {
 }
 
 saveToStorage(STORAGE_KEY, locs)
-
-//
