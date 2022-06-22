@@ -65,7 +65,7 @@ function addMarker(loc) {
   return marker
 }
 
-function panTo(lat, lng) {
+function panTo(lat = 35.713954983148945, lng = 139.75391762230203) {
   var laLatLng = new google.maps.LatLng(lat, lng)
   gMap.panTo(laLatLng)
 }
