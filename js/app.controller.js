@@ -4,6 +4,7 @@ import { mapService } from './services/map.service.js'
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
+window.onDeleteLoc = onDeleteLoc
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 
@@ -37,11 +38,11 @@ function onGetLocs() {
   })
 }
 
-function renderLocsTable(locs){
+function renderLocsTable(locs) {
   Promise.all([...locs]).then((locs) => {
     
     const strHTMLs = locs.map((loc)=>
-      `<tbody>
+      `<tbody class="loc-table${loc.id}">
       <td>${loc.id}</td>
       <td>${loc.name}</td>
       <td>${loc.lat}</td>
@@ -49,8 +50,8 @@ function renderLocsTable(locs){
       <td>${loc.weather}</td>
       <td>${loc.createdAt}</td>
       <td>${loc.updatedAt}</td>
-      <td><button onclick="">GO</button></td>
-      <td><button onclick="">DELETE</button></td>
+      <td><button onclick="onPanTo('${loc.lat}','${loc.lng}')">GO</button></td>
+      <td><button onclick="onDeleteLoc('${loc.id}')">DELETE</button></td>
       </tbody>`
       )
       console.log('losc',locs)
@@ -62,16 +63,20 @@ function renderLocsTable(locs){
 function onGetUserPos() {
   getPosition()
     .then((pos) => {
-      console.log('User position is:', pos.coords)
-      document.querySelector('.user-pos').innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+      onPanTo(pos.coords.latitude, pos.coords.longitude)
+      //   document.querySelector('.user-pos').innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
     })
     .catch((err) => {
       console.log('err!!!', err)
     })
 }
 
-function onPanTo() {
-  console.log('Panning the Map to tokio')
-  mapService.panTo(35.6895, 139.6917)
+function onPanTo(lat, lng) {
+  mapService.panTo(lat, lng)
+}
+
+function onDeleteLoc(locId) {
+  document.querySelector(`.loc-table${locId}`).innerHTML = ''
+  locService.deleteLoc(locId)
 }
 
