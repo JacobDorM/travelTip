@@ -1,11 +1,11 @@
-import { locService } from "./loc.service.js"
 
 export const mapService = {
   initMap,
   addMarker,
   panTo,
 }
-var gloc
+
+var gloc 
 var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -36,6 +36,7 @@ function addMarker(loc) {
     position: loc,
     map: gMap,
     title: "Hello World!",
+
   })
   return marker
 }
@@ -56,5 +57,6 @@ function _connectGoogleApi() {
   return new Promise((resolve, reject) => {
     elGoogleApi.onload = resolve
     elGoogleApi.onerror = () => reject("Google script failed to load")
+
   })
 }
