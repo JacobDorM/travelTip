@@ -20,7 +20,7 @@ const locs = [
   },
   {
     id: 1,
-    name: "Neveragain",
+    name: "ramat gan",
     lat: 32.047201,
     lng: 34.832581,
     weather: "-10⛄",
@@ -29,7 +29,7 @@ const locs = [
   },
   {
     id: 2,
-    name: "Neverland",
+    name: "sea",
     lat: 32.557201,
     lng: 34.832581,
     weather: "25🌞",
@@ -39,8 +39,8 @@ const locs = [
   {
     id: 3,
     name: "Neverland",
-    lat: 32.557201,
-    lng: 34.832581,
+    lat: 37.557201,
+    lng: 36.835681,
     weather: "15☔",
     createdAt: showTime(Date.now()),
     updatedAt: Date.now(),

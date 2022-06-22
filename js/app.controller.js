@@ -7,6 +7,7 @@ window.onPanTo = onPanTo
 window.onDeleteLoc = onDeleteLoc
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onCodeAddress = onCodeAddress
 
 function onInit() {
   mapService
@@ -23,6 +24,10 @@ function getPosition() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject)
   })
+}
+
+function onCodeAddress(){
+  mapService.codeAddress()
 }
 
 function onAddMarker() {
@@ -42,7 +47,7 @@ function renderLocsTable(locs) {
   Promise.all([...locs]).then((locs) => {
     
     const strHTMLs = locs.map((loc)=>
-      `<tbody class="loc-table${loc.id}">
+      `<tr class="loc-table${loc.id}">
       <td>${loc.id}</td>
       <td>${loc.name}</td>
       <td>${loc.lat}</td>
@@ -52,7 +57,7 @@ function renderLocsTable(locs) {
       <td>${loc.updatedAt}</td>
       <td><button onclick="onPanTo('${loc.lat}','${loc.lng}')">GO</button></td>
       <td><button onclick="onDeleteLoc('${loc.id}')">DELETE</button></td>
-      </tbody>`
+      </tr>`
       )
       console.log('losc',locs)
       document.querySelector(".locs-table").innerHTML = strHTMLs.join("")
