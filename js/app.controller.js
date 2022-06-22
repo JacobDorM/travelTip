@@ -48,6 +48,6 @@ function onGetUserPos() {
 }
 
 function onPanTo() {
-  console.log('Panning the Map')
+  console.log('Panning the Map to tokio')
   mapService.panTo(35.6895, 139.6917)
 }
