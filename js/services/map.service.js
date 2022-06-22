@@ -1,42 +1,40 @@
-
 export const mapService = {
   initMap,
   addMarker,
   panTo,
 }
 
-var gloc 
+var gloc
 var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-  console.log("InitMap")
+  console.log('InitMap')
+
   return _connectGoogleApi().then(() => {
-    console.log("google available")
-    gMap = new google.maps.Map(document.querySelector("#map"), {
+    console.log('google available')
+    gMap = new google.maps.Map(document.querySelector('#map'), {
       center: { lat, lng },
       zoom: 15,
     })
-    
+
     //on click map return location
-    gloc = gMap.addListener("click", (mapsMouseEvent) => {
+    gloc = gMap.addListener('click', (mapsMouseEvent) => {
       lat = mapsMouseEvent.latLng.lat()
       lng = mapsMouseEvent.latLng.lng()
-      console.log("loc", { lat, lng })
+      console.log('loc', { lat, lng })
       return { lat, lng }
     })
 
     // console.log('locs',locs)
-    console.log("Map)ap!", gMap)
+    console.log('Map)ap!', gMap)
   })
-
 }
 
 function addMarker(loc) {
   var marker = new google.maps.Marker({
     position: loc,
     map: gMap,
-    title: "Hello World!",
-
+    title: 'Hello World!',
   })
   return marker
 }
@@ -48,15 +46,14 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
   if (window.google) return Promise.resolve()
-  const API_KEY = "AIzaSyAVHxe2zbm4vxjtZhAbTmVnhLjbGuGrVK0" 
-  var elGoogleApi = document.createElement("script")
+  const API_KEY = 'AIzaSyAVHxe2zbm4vxjtZhAbTmVnhLjbGuGrVK0'
+  var elGoogleApi = document.createElement('script')
   elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
   elGoogleApi.async = true
   document.body.append(elGoogleApi)
 
   return new Promise((resolve, reject) => {
     elGoogleApi.onload = resolve
-    elGoogleApi.onerror = () => reject("Google script failed to load")
-
+    elGoogleApi.onerror = () => reject('Google script failed to load')
   })
 }
