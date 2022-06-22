@@ -7,6 +7,8 @@ window.onPanTo = onPanTo
 window.onDeleteLoc = onDeleteLoc
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onCodeAddress = onCodeAddress
+
 window.onCopyGithubPages = onCopyGithubPages
 function onInit() {
   mapService
@@ -27,6 +29,10 @@ function getPosition() {
   })
 }
 
+function onCodeAddress(){
+  mapService.codeAddress()
+}
+
 function onAddMarker() {
   console.log('Adding a marker')
   mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
@@ -41,9 +47,9 @@ function onGetLocs() {
 
 function renderLocsTable(locs) {
   Promise.all([...locs]).then((locs) => {
-    const strHTMLs = locs.map(
-      (loc) =>
-        `<tr class="loc-table${loc.id}">
+    
+    const strHTMLs = locs.map((loc)=>
+      `<tr class="loc-table${loc.id}">
       <td>${loc.id}</td>
       <td>${loc.name}</td>
       <td>${loc.lat}</td>
